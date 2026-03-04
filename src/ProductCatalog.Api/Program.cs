@@ -2,6 +2,9 @@ using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Api.Extensions;
 using ProductCatalog.Api.Middlewares;
 using ProductCatalog.Infrastructure.Persistence;
+using ProductCatalog.Application.Services.Products;
+using ProductCatalog.Infrastructure.Repositories;
+using ProductCatalog.Application.Contracts.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +35,14 @@ builder.Services.AddDbContext<ProductCatalogDbContext>(options =>
 builder.Services.AddHealthChecks()
     .AddNpgSql(connectionString);
 
+// DI (ANTES do Build)
+builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
+
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
+
+builder.Services.AddScoped<IProductService, ProductService>();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -43,13 +54,13 @@ if (app.Environment.IsDevelopment())
 // Routing primeiro (padrão)
 app.UseRouting();
 
-// Correlation cedo (para TraceId existir em tudo)
+// Correlation cedo
 app.UseMiddleware<RequestCorrelationMiddleware>();
 
-// Exception handling cedo (pega tudo que vem depois)
+// Exception handling cedo
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
-// Request logging (envolve o resto e garante log final com finally)
+// Request logging
 app.Use(async (ctx, next) =>
 {
     var logger = ctx.RequestServices
@@ -72,7 +83,7 @@ app.Use(async (ctx, next) =>
     }
 });
 
-// Auth (se não tiver auth agora, pode deixar; não atrapalha)
+// Auth (ok manter, mesmo sem autenticação por enquanto)
 app.UseAuthorization();
 
 // Endpoints

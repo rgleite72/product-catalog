@@ -10,7 +10,6 @@ public class ProductCatalogDbContext: DbContext
 
     public DbSet<Product> Products => Set<Product>();
     public DbSet<ProductPrice> ProductPrices => Set<ProductPrice>();
-    public DbSet<ProductStock> ProductStocks => Set<ProductStock>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

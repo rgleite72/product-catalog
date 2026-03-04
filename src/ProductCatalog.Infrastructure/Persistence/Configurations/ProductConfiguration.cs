@@ -46,11 +46,6 @@ public class ProductConfiguration: IEntityTypeConfiguration<Product>
             .HasColumnName("updated_at")
             .IsRequired();
 
-        // 1:N Product -> Prices
-        builder.HasMany(x => x.Prices)
-                .WithOne(x => x.Product)
-                .HasForeignKey(x => x.ProductId)
-                .OnDelete(DeleteBehavior.Cascade);
 
 
     }

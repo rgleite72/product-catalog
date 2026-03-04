@@ -17,6 +17,6 @@ public class Product
 
     public ICollection<ProductPrice> Prices {get; set;} = new List<ProductPrice>();
 
-    public ProductStock? Stock { get; set; } 
+
 
 }
