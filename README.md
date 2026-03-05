@@ -54,6 +54,7 @@ The solution follows a layered architecture:
 ## Project Structure
 
 src/
+
  ├── ProductCatalog.API
 
  ├── ProductCatalog.Application
@@ -61,7 +62,7 @@ src/
  ├── ProductCatalog.Domain
 
  ├── ProductCatalog.Infrastructure
- 
+
 
 ## Main Features
 
@@ -96,6 +97,7 @@ PATCH /api/products/{id}/inactivate
 ### Prices
 
 POST /api/products/{id}/prices
+
 GET /api/products/{id}/prices
 
 
