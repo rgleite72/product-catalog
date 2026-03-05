@@ -55,9 +55,13 @@ The solution follows a layered architecture:
 
 src/
  ├── ProductCatalog.API
+
  ├── ProductCatalog.Application
+
  ├── ProductCatalog.Domain
+
  ├── ProductCatalog.Infrastructure
+ 
 
 ## Main Features
 
@@ -79,9 +83,13 @@ src/
 ### Products
 
 POST /api/products
+
 GET /api/products
+
 GET /api/products/{id}
+
 PUT /api/products/{id}
+
 PATCH /api/products/{id}/inactivate
 
 
