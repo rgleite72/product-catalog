@@ -34,5 +34,11 @@ Thumbs.db
 # Docker
 docker-compose.override.yml
 
-
+# ASP.NET
 appsettings.Development.json
+
+# NuGet local cache artifacts
+*.nupkg
+
+# EF temporary files
+*.dbmdl

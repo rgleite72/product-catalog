@@ -2,10 +2,13 @@ services:
   db:
     image: postgres:16-alpine
     container_name: productcatalog-db
+    env_file:
+      - .env
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    
     ports:
       - "5432:5432"
     healthcheck:
@@ -19,14 +22,16 @@ services:
   api:
     build:
       context: .
-      dockerfile: src/ProductCatalog.Api/Dockerfile
+      dockerfile: Dockerfile
     container_name: productcatalog-api
+    env_file:
+      - .env
     environment:
       ASPNETCORE_ENVIRONMENT: ${ASPNETCORE_ENVIRONMENT}
+      
       ConnectionStrings__DefaultConnection: ${CONNECTION_STRING}
-
     ports:
-      - "${API_PORT}:8080"
+      - "${API_PORT:-8080}:8080"
     depends_on:
       db:
         condition: service_healthy

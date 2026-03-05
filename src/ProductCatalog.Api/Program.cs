@@ -39,7 +39,6 @@ builder.Services.AddHealthChecks()
 builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
-builder.Services.AddScoped<IProductPriceRepository, ProductPriceRepository>();
 
 builder.Services.AddScoped<IProductService, ProductService>();
 
